@@ -3,7 +3,7 @@ package com.demo.game.service;
 import com.demo.game.Constant;
 import com.demo.game.api.model.Game;
 import com.demo.game.api.model.PlayStatus;
-import com.demo.game.exception.InvalidPlayerTurn;
+import com.demo.game.exception.InvalidPlayerTurnException;
 import com.demo.game.model.KalahPlayer;
 import com.demo.game.model.KalahaGame;
 import com.demo.game.model.PlayerStatus;
@@ -29,11 +29,11 @@ public class KalahaGameService {
     KalahaGame kalahaGame = kalahaGameMap.get(gameId);
     PlayerStatus playerStatus = kalahaGame.getPlayerStatus();
     if (!PlayerStatus.isPlayerOne(playerStatus) && !PlayerStatus.isPlayerTwo(playerStatus)) {
-      throw new InvalidPlayerTurn("Game Over and Winner player is  " + playerStatus);
+      throw new InvalidPlayerTurnException("Game Over and Winner player is  " + playerStatus);
     }
     int pit = pitId.intValue() - 1;
     if (!isValidMove(kalahaGame, pit))
-      throw new InvalidPlayerTurn("For Player " + playerStatus + " not a valid pit " + pitId);
+      throw new InvalidPlayerTurnException("For Player " + playerStatus + " not a valid pit " + pitId);
     if (PlayerStatus.isPlayerOne(playerStatus)) {
       play(kalahaGame, pit, kalahaGame.getPlayer1());
     } else if (PlayerStatus.isPlayerTwo(playerStatus)) {

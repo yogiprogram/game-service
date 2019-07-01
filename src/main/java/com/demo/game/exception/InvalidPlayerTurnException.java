@@ -4,22 +4,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.FORBIDDEN)
-public class InvalidPlayerTurn extends RuntimeException {
-  public InvalidPlayerTurn() {}
+public class InvalidPlayerTurnException extends RuntimeException {
+  public InvalidPlayerTurnException() {}
 
-  public InvalidPlayerTurn(String message) {
+  public InvalidPlayerTurnException(String message) {
     super(message);
   }
 
-  public InvalidPlayerTurn(String message, Throwable cause) {
+  public InvalidPlayerTurnException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public InvalidPlayerTurn(Throwable cause) {
+  public InvalidPlayerTurnException(Throwable cause) {
     super(cause);
   }
 
-  public InvalidPlayerTurn(
+  public InvalidPlayerTurnException(
       String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
     super(message, cause, enableSuppression, writableStackTrace);
   }
