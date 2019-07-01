@@ -44,7 +44,11 @@ public interface GamesApi {
       response = Game.class,
       tags = {})
   @ApiResponses(value = {@ApiResponse(code = 201, message = "OK", response = Game.class)})
-  @RequestMapping(value = "/games", method = RequestMethod.POST)
+  @RequestMapping(
+      value = "/games",
+      produces = {"application/json"},
+      consumes = {"application/json"},
+      method = RequestMethod.POST)
   default ResponseEntity<Game> createGame() {
     if (getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
       if (getAcceptHeader().get().contains("application/json")) {
@@ -75,7 +79,11 @@ public interface GamesApi {
       response = PlayStatus.class,
       tags = {})
   @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = PlayStatus.class)})
-  @RequestMapping(value = "/games/{game_id}/pits/{pit_id}", method = RequestMethod.PUT)
+  @RequestMapping(
+      value = "/games/{game_id}/pits/{pit_id}",
+      produces = {"application/json"},
+      consumes = {"application/json"},
+      method = RequestMethod.PUT)
   default ResponseEntity<PlayStatus> makePitMove(
       @ApiParam(value = "Game id", required = true) @PathVariable("game_id") Integer gameId,
       @ApiParam(value = "Pit id", required = true) @PathVariable("pit_id") Integer pitId) {
