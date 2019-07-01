@@ -1,24 +1,17 @@
 package com.demo.game.api.model;
 
-import java.util.Objects;
-import com.demo.game.api.model.Game;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-/**
- * PlayStatus
- */
+/** PlayStatus */
 @Validated
-
-public class PlayStatus   {
+public class PlayStatus {
   @JsonProperty("id")
   private Integer id = null;
 
@@ -36,11 +29,10 @@ public class PlayStatus   {
 
   /**
    * Get id
+   *
    * @return id
-  **/
+   */
   @ApiModelProperty(example = "1234", value = "")
-
-
   public Integer getId() {
     return id;
   }
@@ -56,11 +48,10 @@ public class PlayStatus   {
 
   /**
    * Get uri
+   *
    * @return uri
-  **/
+   */
   @ApiModelProperty(example = "http://<host>:<port>/games/1234", value = "")
-
-
   public String getUri() {
     return uri;
   }
@@ -84,11 +75,10 @@ public class PlayStatus   {
 
   /**
    * Get status
+   *
    * @return status
-  **/
+   */
   @ApiModelProperty(value = "")
-
-
   public Map<String, String> getStatus() {
     return status;
   }
@@ -96,7 +86,6 @@ public class PlayStatus   {
   public void setStatus(Map<String, String> status) {
     this.status = status;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -107,9 +96,9 @@ public class PlayStatus   {
       return false;
     }
     PlayStatus playStatus = (PlayStatus) o;
-    return Objects.equals(this.id, playStatus.id) &&
-        Objects.equals(this.uri, playStatus.uri) &&
-        Objects.equals(this.status, playStatus.status);
+    return Objects.equals(this.id, playStatus.id)
+        && Objects.equals(this.uri, playStatus.uri)
+        && Objects.equals(this.status, playStatus.status);
   }
 
   @Override
@@ -121,7 +110,7 @@ public class PlayStatus   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PlayStatus {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    uri: ").append(toIndentedString(uri)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
@@ -130,8 +119,7 @@ public class PlayStatus   {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
@@ -140,4 +128,3 @@ public class PlayStatus   {
     return o.toString().replace("\n", "\n    ");
   }
 }
-

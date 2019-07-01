@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GameController implements GamesApi {
 
-    @Autowired
-    private KalahaGameService kalahaGameService;
+  @Autowired private KalahaGameService kalahaGameService;
 
-    @Override
-    public ResponseEntity<Game> createGame() {
-        return new ResponseEntity(kalahaGameService.createGame(), HttpStatus.CREATED);
-    }
+  @Override
+  public ResponseEntity<Game> createGame() {
+    return new ResponseEntity(kalahaGameService.createGame(), HttpStatus.CREATED);
+  }
 
-    @Override
-    public ResponseEntity<PlayStatus> makePitMove(@PathVariable("game_id") Integer gameId, @PathVariable("pit_id") Integer pitId) {
-        return new ResponseEntity(kalahaGameService.play(gameId, pitId), HttpStatus.OK);
-    }
+  @Override
+  public ResponseEntity<PlayStatus> makePitMove(
+      @PathVariable("game_id") Integer gameId, @PathVariable("pit_id") Integer pitId) {
+    return new ResponseEntity(kalahaGameService.play(gameId, pitId), HttpStatus.OK);
+  }
 }

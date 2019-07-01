@@ -1,20 +1,14 @@
 package com.demo.game.api.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
-/**
- * Game
- */
+import java.util.Objects;
+
+/** Game */
 @Validated
-
-public class Game   {
+public class Game {
   @JsonProperty("id")
   private Integer id = null;
 
@@ -28,11 +22,10 @@ public class Game   {
 
   /**
    * Get id
+   *
    * @return id
-  **/
+   */
   @ApiModelProperty(example = "1234", value = "")
-
-
   public Integer getId() {
     return id;
   }
@@ -48,11 +41,10 @@ public class Game   {
 
   /**
    * Get uri
+   *
    * @return uri
-  **/
+   */
   @ApiModelProperty(example = "http://<host>:<port>/games/1234", value = "")
-
-
   public String getUri() {
     return uri;
   }
@@ -60,7 +52,6 @@ public class Game   {
   public void setUri(String uri) {
     this.uri = uri;
   }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -71,8 +62,7 @@ public class Game   {
       return false;
     }
     Game game = (Game) o;
-    return Objects.equals(this.id, game.id) &&
-        Objects.equals(this.uri, game.uri);
+    return Objects.equals(this.id, game.id) && Objects.equals(this.uri, game.uri);
   }
 
   @Override
@@ -84,7 +74,7 @@ public class Game   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Game {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    uri: ").append(toIndentedString(uri)).append("\n");
     sb.append("}");
@@ -92,8 +82,7 @@ public class Game   {
   }
 
   /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
    */
   private String toIndentedString(java.lang.Object o) {
     if (o == null) {
@@ -102,4 +91,3 @@ public class Game   {
     return o.toString().replace("\n", "\n    ");
   }
 }
-
