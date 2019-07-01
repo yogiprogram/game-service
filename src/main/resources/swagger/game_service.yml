@@ -1,0 +1,82 @@
+swagger: "2.0"
+info:
+  description: "This is Kalah Game Rest service server."
+  version: "1.0.0"
+  title: "Kalah Game REST API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "yogesh.it2010@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8182"
+basePath: "/game-service"
+tags:
+- name: "game-api"
+  description: "Send email to user"
+schemes:
+- "http"
+paths:
+
+  "/games":
+    post:
+      summary: "Create Game"
+      operationId: createGame
+      responses:
+        201:
+          description: OK
+          schema:
+            $ref: "#/definitions/Game"
+
+
+  "/games/{game_id}/pits/{pit_id}":
+    parameters:
+    - in: path
+      name: game_id
+      description: "Game id"
+      required: true
+      type: integer
+    - in: path
+      name: pit_id
+      description: "Pit id"
+      required: true
+      type: integer
+
+    put:
+      summary: "Make a pit move by using game_id"
+      description: "Make a pit move by using game_id"
+      operationId: makePitMove
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PlayStatus'
+
+
+definitions:
+  Game:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1234
+      uri:
+        type: string
+        example: "http://<host>:<port>/games/1234"
+
+
+  PlayStatus:
+    allOf:
+    - $ref: '#/definitions/Game'
+    - type: object
+      properties:
+        status:
+          type: object
+          additionalProperties:
+            type: string
+
+
+
+
+
+

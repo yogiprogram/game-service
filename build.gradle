@@ -1,0 +1,98 @@
+buildscript {
+    dependencies {
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.1.4.RELEASE'
+    id 'java'
+    id "org.hidetake.swagger.generator" version "2.11.0"
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'docker'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.demo.game'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+ext {
+    springCloudVersion = 'Finchley.SR2'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://packages.confluent.io/maven/" }
+}
+
+defaultTasks 'bootRun'
+bootRun {
+    main = 'com.demo.game.GameApplication'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    swaggerCodegen 'io.swagger:swagger-codegen-cli:2.3.1'
+    compile("io.springfox:springfox-swagger2:2.9.2")
+    compile("io.springfox:springfox-swagger-ui:2.9.2")
+    compile("io.springfox:springfox-bean-validators:2.9.2")
+    compile("com.google.guava:guava:20.0")
+}
+
+swaggerSources {
+    game_api {
+        inputFile = file('src/main/resources/swagger/game_service.yml')
+        code {
+            language = 'spring'
+            configFile = file('src/main/resources/swagger/config.json')
+        }
+    }
+}
+
+task copyGeneratedCode(type: Copy, dependsOn: "generateSwaggerCodeGame_api") {
+    from 'build/swagger-code-game_api/src/main/java'
+    into 'src/main/java'
+}
+
+task makePretty(type: Delete) {
+    delete 'build/java'
+    delete 'src/main/java/com/demo/game/api'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/swagger-code-notification/src/main/resources'
+        }
+    }
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    tag = "yogeshw/${applicationName}"
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}

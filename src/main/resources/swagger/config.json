@@ -1,0 +1,9 @@
+{
+  "apiPackage": "com.demo.game.api",
+  "modelPackage": "com.demo.game.api.model",
+  "invokerPackage": "com.demo.game",
+  "library": "spring-mvc",
+  "dateLibrary": "java8",
+  "interfaceOnly": "true",
+  "hideGenerationTimestamp": true
+}
